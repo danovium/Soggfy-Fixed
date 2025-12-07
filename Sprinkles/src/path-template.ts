@@ -252,4 +252,4 @@ export class TemplatedSearchTree {
         const newChild: TemplateNode = {
             children: [],
             pattern,
-            literal: isLiteral
+            literal:
