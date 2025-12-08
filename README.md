@@ -15,6 +15,9 @@ However, given that it acts like a Spicetify plugin of sorts, it isn't impossibl
 
 Maybe sometime in the future I'll take a look at it, as of right now, this is Windows only. (Wine will not work)
 
+In the meantime, you can check out these alternatives:
+-[OnTheSpot](https://github.com/justin025/onthespot)
+
 
 # Issues
 In my testing, installing Soggfy does not apply its Theme correctly. Therefore the Download button will look a lot uglier. 
