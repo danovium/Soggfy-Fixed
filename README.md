@@ -15,8 +15,13 @@ However, given that it acts like a Spicetify plugin of sorts, it isn't impossibl
 
 Maybe sometime in the future I'll take a look at it, as of right now, this is Windows only. (Wine will not work)
 
-In the meantime, you can check out these alternatives:
--[OnTheSpot](https://github.com/justin025/onthespot)
+## Alternatives
+- [OnTheSpot](https://github.com/justin025/onthespot) - supports Linux, macOS and Windows. has a nice GUI
+- [Zotify (DraftKinner Repo)](https://github.com/DraftKinner/zotify) - Zotify fork maintained by DraftKinner, Python script to download songs via a Terminal
+- [Spotizer](https://lavaforge.org/spotizerr) - Download manager, meant for Media Servers, supports downloading from Deezer for FLACs
+- [DAB Music Player](https://dab.yeet.su/) - Music Downloads, recommended for Mobile Users
+- [Soulseek](https://www.slsknet.org/news/) - P2P platform for downloading music
+
 
 
 # Issues
