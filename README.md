@@ -1,12 +1,18 @@
 
 
 # Soggfy-Fixed
-This is my fork of Soggfy that separates contributing artists via a comma instead of a / 
+This is my fork of Soggfy that separates contributing artists via a comma instead of anything else.
+Additionally, this repo contains a few changes to be able to be built on GitHub Actions.
 
 # Why?
-Using Soggfy is great, but playing back Songs on iTunes (or the iOS Music app) leads to inaccurate last.fm scrobbles and false search results (ex. Drake/Future is counted as one artist, instead of two seperate ones)
+When saving a song with multiple Artists, Soggfy would divide them differently based on what you were using.
 
-Additionally, this repo contains a few changes to be able to be built on GitHub Actions.
+In my case, I'm using iTunes and syncing my Library to my iPhone. The Artists are divided via a /.
+Scrobbing on either Device lead to inaccurate last.fm info. As contributing Artists were counted as one instead of two. (ex. Drake/Future instead of Drake, Future).
+
+That was obviously pretty annoying, so I spent about 2 hours editing the path-template so it will always divide them via a comma.
+
+Now, of course, this means that other apps/devices may handle this differently, if you haven't had this issue on regular Soggfy, then you probably don't need this.
 
 # Note
 Every metadata OTHER than genres are included. This is because Soggfy would have to contact Spotify's API directly through your own app on the Developer Portal, which increases the chances of being banned. 
