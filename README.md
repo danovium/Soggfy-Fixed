@@ -26,12 +26,10 @@ Maybe sometime in the future I'll take a look at it, as of right now, this is Wi
 Remember to support indie artists by buying their merch or simply donating, Spotify's payout isn't fair (0.0005$ per stream) but YOUR 5$ donation could equal to listening to their music over 1000 times. 
 
 
-# Issues
-In my testing, installing Soggfy does not apply its Theme correctly. Therefore the Download button will look a lot uglier. 
-However, AD blocking and downloading itself should still work.
+# Before Installing
+Make sure that Real-time protection in Windows Security is turned off. Soggfy will still work even if you have it on, but the custom theme (and other stuff like blocking updates) won't work. 
 
-Another issue ive had is search being broken. I'm not exactly sure if this applies to other people, but if it does, I'm sorry.
-You can play an album on your phone, then change the output device to be your PC. (or add it to your Library)
+Additionally, search will also be broken if it isn't disabled.
 
 # Disclaimer
 As with the original repo, this program should not be used to download music you don't physically or digitally own.
