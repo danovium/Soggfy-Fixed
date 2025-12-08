@@ -21,5 +21,5 @@ In my testing, installing Soggfy does not apply its Theme correctly. Therefore t
 However, AD blocking and downloading itself should still work.
 
 Another issue ive had is search being broken. I'm not exactly sure if this applies to other people, but if it does, I'm sorry.
-You can play an album on your phone, then change the output device to be your PC
+You can play an album on your phone, then change the output device to be your PC. (or add it to your Library)
 
