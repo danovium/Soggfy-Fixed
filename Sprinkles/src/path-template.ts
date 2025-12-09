@@ -39,6 +39,12 @@ export class PathTemplate {
             getValue: m => m.artist || m.album_artist
         },
         {
+            name: "composer_names",
+            desc: "Artists that are not the album artist, treated as composers",
+            pattern: `.+`,
+            getValue: m => m.composers ?? ""
+        },
+        {
             name: "album_name",
             desc: "Album name / Podcast name",
             pattern: `.+`,
@@ -108,7 +114,9 @@ export class PathTemplate {
         }
     ]);
 
-    /** Normalize metadata so artists always use commas instead of slashes */
+    /** Normalize metadata so artists always use commas instead of slashes,
+     * and separate secondary artists into a composer field.
+     */
     static normalizeMetadata(meta: any) {
         if (meta.artist) {
             meta.artist = meta.artist.replaceAll("/", ", ");
@@ -120,6 +128,21 @@ export class PathTemplate {
             meta.context.metadata.context_description =
                 meta.context.metadata.context_description.replaceAll("/", ", ");
         }
+
+        // --- NEW LOGIC: split artists into main vs composers ---
+        if (meta.artist) {
+            let allArtists = meta.artist
+                .split(",")
+                .map(a => a.trim())
+                .filter(a => a.length > 0);
+
+            let albumArtist = (meta.album_artist ?? "").trim();
+
+            let composers = allArtists.filter(a => a !== albumArtist);
+
+            meta.composers = composers.join(", ");
+        }
+
         return meta;
     }
 
@@ -147,7 +170,6 @@ export class PathTemplate {
     }
 
     static escapePath(str: string) {
-        //https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file
         const ReplacementChars = {
             '\\': '＼',
             '/': '／',
@@ -163,16 +185,10 @@ export class PathTemplate {
         if (repl === "unicode") {
             repl = (v: string) => ReplacementChars[v] ?? " ";
         }
-        //invalid characters -> similar characters
         str = str.replace(/[\x00-\x1f\/\\:*?"<>|]/g, repl);
-        //leading/trailling spaces -> "\u2002 En Space"
         str = str.replace(/(^ +| +$)/g, "\u2002");
-        //trailling dots -> "\uFF0E Fullwidth Stop"
-        //also handles ".."
         str = str.replace(/\.+$/g, v => "．".repeat(v.length));
-        //special names (append "\u2002")
         str = str.replace(/^(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/gi, "$&\u2002");
-
         return str;
     }
 
@@ -183,7 +199,6 @@ export class PathTemplate {
         return path.replace(/(?:\.[^\\\/\.]*)?$/, newExt);
     }
 
-    // a/b/c.txt | a/b/c  ->  a/b
     static getParentPath(path: string) {
         let index = path.replaceAll('\\', '/').lastIndexOf('/');
         return index < 0 ? path : path.substring(0, index);
@@ -239,21 +254,4 @@ export class TemplatedSearchTree {
             node.id = id;
         } else if (node.id !== id) {
             node.id += ",";
-            node.id += id;
-        }
-    }
-        private findOrAddChild(node: TemplateNode, pattern: string, isLiteral: boolean): TemplateNode {
-        for (let child of node.children) {
-            if (child.pattern === pattern && child.literal === isLiteral) {
-                return child;
-            }
-        }
-        const newChild: TemplateNode = {
-            children: [],
-            pattern,
-            literal: isLiteral
-        };
-        node.children.push(newChild);
-        return newChild;
-    }
-} // <-- closes class TemplatedSearchTree
+            node
